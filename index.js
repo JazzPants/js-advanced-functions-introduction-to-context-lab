@@ -125,11 +125,11 @@ console.log(obj.number);
 
 
 //composing a function, functions add their outputs on top of each other, but this isn't functional
-const toSlug = input => encodeURIComponent (
-  input.split(' ')
-  .map(str => str.LowerCase())
-  .join('-')
-)
+// const toSlug = input => encodeURIComponent (
+//   input.split(' ')
+//   .map(str => str.LowerCase())
+//   .join('-')
+// )
 
 //functional approach:
 const toSlug = input => encodeURIComponent (
@@ -152,20 +152,20 @@ const toSlug = input => encodeURIComponent (
 //Avoid mutations of shared states. Use immutable methods (methods which DON't mutate the original variables)
 //taken from https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
 //Example: non-mutating/non-destrutive
-const x = {
-  val: 2
-};
+// const x = {
+//   val: 2
+// };
 
-const x1 = x => Object.assign({}, x, { val: x.val + 1});
+// const x1 = x => Object.assign({}, x, { val: x.val + 1});
 
-const x2 = x => Object.assign({}, x, { val: x.val * 2});
+// const x2 = x => Object.assign({}, x, { val: x.val * 2});
 
-console.log(x1(x2(x)).val); // 5
+// console.log(x1(x2(x)).val); // 5
 
 
-const y = {
-  val: 2
-};
+// const y = {
+//   val: 2
+// };
 
 // Since there are no dependencies on outside variables,
 // we don't need different functions to operate on different
@@ -177,10 +177,10 @@ const y = {
 // Because the functions don't mutate, you can call these
 // functions as many times as you want, in any order, 
 // without changing the result of other function calls.
-x2(y);
-x1(y);
+// x2(y);
+// x1(y);
 
-console.log(x1(x2(y)).val); // 5
+// console.log(x1(x2(y)).val); // 5
 
 //Avoiding side effects 1:26:45 in lecture
 //make sure the function doesn't ever AFFECT anything outside the scope 
