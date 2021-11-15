@@ -100,3 +100,92 @@ console.log(thorIntro("Hello"));
 //console.log(introWithContext("Hello")); 
 //there is no first name or family name in the global object, 
 //no context is applied yet (i.e.a firstName and familyName) //undefined undefined says: Hello
+
+//
+//              ~~~~~~~~~~~~~~FUNCTIONAL PROGRAMMING (FP) ~~~~~~~~~~~~~~
+let obj = {
+  number: 5
+};
+
+function multiplyByTwo() {
+  obj.number = obj.number * 2;
+}
+
+function addByFive() {
+  obj.number = obj.number + 5;
+}
+
+addByFive();
+multiplyByTwo();
+
+console.log(obj.number);
+//non-functional programming, not a pure function, because the output changes with the same input!
+//non functional functions: states are shared (the variable obj is shared)
+
+
+
+//composing a function, functions add their outputs on top of each other, but this isn't functional
+const toSlug = input => encodeURIComponent (
+  input.split(' ')
+  .map(str => str.LowerCase())
+  .join('-')
+)
+
+//functional approach:
+const toSlug = input => encodeURIComponent (
+  join('-')(
+    map(toLowerCase)(
+      split(' ')( 
+        input
+      )
+    )
+  )
+)
+//split array with spaces first, then, make array lowercase, then join by dash
+//split first innermost function, then map second innermost function, then join function
+//final output is a string, with array strings connected by a dash
+
+
+// the two functions work the same way, but this is a more functional compositional way, using the arguments
+
+
+//Avoid mutations of shared states. Use immutable methods (methods which DON't mutate the original variables)
+//taken from https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
+//Example: non-mutating/non-destrutive
+const x = {
+  val: 2
+};
+
+const x1 = x => Object.assign({}, x, { val: x.val + 1});
+
+const x2 = x => Object.assign({}, x, { val: x.val * 2});
+
+console.log(x1(x2(x)).val); // 5
+
+
+const y = {
+  val: 2
+};
+
+// Since there are no dependencies on outside variables,
+// we don't need different functions to operate on different
+// variables.
+
+// this space intentionally left blank
+
+
+// Because the functions don't mutate, you can call these
+// functions as many times as you want, in any order, 
+// without changing the result of other function calls.
+x2(y);
+x1(y);
+
+console.log(x1(x2(y)).val); // 5
+
+//Avoiding side effects 1:26:45 in lecture
+//make sure the function doesn't ever AFFECT anything outside the scope 
+//(which might be shared with another function!!) of the function, otherwise bugs might be created
+
+//Declarative vs. Imperative
+//Declarative use map - specify the return you want
+//Imperative use for/if loop
