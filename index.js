@@ -32,7 +32,7 @@ x.y.b(); //b is a function
 //arrow will refer to the root object "Window"
 
 //regular will refer to the object that wraps the this keyword (e.g. the function which wraps this)
-
+//Implicit Context
 let speak = function() { return `It ain't easy being ${this.name}`}
 let frog = { name: "Kermit" }
 let pig = { name: "Miss Piggy" }
@@ -87,4 +87,16 @@ const elements = [0, 1, 2];
 array.push.apply(array, elements);
 console.info(array); // ["a", "b", 0, 1, 2] //console.log vs console.info?
 
-//bind lecture 1:03:15
+//Topic - Bind
+//lecture 1:03:15
+
+let thorIntro = introWithContext.bind(asgardianBrothers[0]) //binds a permanent argument, which is the "Thor Odinsson" object!
+//so when you call thorIntro, it always uses "Thor Odinsson" then the given phrase ->return `${this.firstName} ${this.familyName} says: ${line}`
+thorIntro("Hi, Jane") //=> Thor Odinsson says: Hi, Jane
+thorIntro("I love snakes") //=> Thor Odinsson says: I love snakes
+console.log(thorIntro("Hello"));
+
+//NOTE/TIP
+//console.log(introWithContext("Hello")); 
+//there is no first name or family name in the global object, 
+//no context is applied yet (i.e.a firstName and familyName) //undefined undefined says: Hello
