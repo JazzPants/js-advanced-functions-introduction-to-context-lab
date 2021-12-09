@@ -1,4 +1,126 @@
 // Your code here
+//Start of main lab
+let oneRecord = ["moe", "sizlak", "barkeep", 2]
+
+//pass in oneRecord to this function to make a :"Employee record"
+function createEmployeeRecord(x) {
+  return {firstName: x[0],
+    familyName: x[1],
+    title: x[2],
+    payPerHour: x[3],
+    timeInEvents: [],
+    timeOutEvents: []
+  }
+}
+
+let twoRows = [
+  ["moe", "sizlak", "barkeep", 2],
+  ["bartholomew", "simpson", "scamp", 3]
+]
+
+function createEmployeeRecords(b) {
+  return b.map(x => createEmployeeRecord(x)) //x is every element/array in the array of arrays given to us
+}
+//e.g. for each array in twoRows, i.e. "b", pass in the nested array "x" and perform "createEmployeeRecord" function
+let exampleTimeRecord = createEmployeeRecord(["Byron", "Poodle", "Mascot", 3])
+let exampleTimeIn = "2014-02-28 1400"
+//createTimeInEvent(exampleTimeRecord, exampleTimeIn);
+function createTimeInEvent(x, y) {
+  let a = y.split(" ");
+  let b = x.timeInEvents;
+  let obj = {
+  type: "TimeIn",
+  date: a[0],
+  hour: parseInt(a[1]) //test requires us to turn this into an integer so not just a[1]
+  }
+  b.push(obj);
+  return x
+}
+//My approach -- why doesn't it go through the NPM test?
+//createTimeInEvent() {
+// createEmployeeRecord(x);
+// let a = y.split(" ")
+// x[4] = [{
+//   type: "TimeIn",
+//   hour: a[0],
+//   date: a[1]
+// }];
+// return x
+//}
+
+function createTimeOutEvent(x, y) {
+  let a = y.split(" ");
+  let b = x.timeOutEvents;
+  let obj = {
+  type: "TimeOut",
+  date: a[0],
+  hour: parseInt(a[1])
+  }
+  b.push(obj);
+  return x
+}
+
+function hoursWorkedOnDate(x) {
+  let a = x.timeInEvents //get key value which is an array
+  let b = x.timeOutEvents
+  let timeIn = a[0] //get the first element in that array which is an object
+  let timeOut = b[0]
+  //if the dates for timeInEvents === timeOutEvents {} | extra conditional to check employee clock-in/clock-out
+  let timeWorkedInHours = (timeOut.hour - timeIn.hour) / 100 //get the hour key of that object which is a number variable _ _ 0 0
+  return timeWorkedInHours
+}
+
+
+function wagesEarnedOnDate(x) {
+  let payOwed = (hoursWorkedOnDate(x)) * x.payPerHour;
+  // console.log(`THIS IS A LOG: ${payOwed} on ${y}`); //logs onto npm test! y is supposed to be the date
+  return payOwed
+}
+
+cRecord = createEmployeeRecord(["Julius", "Caesar", "General", 27])
+updatedBpRecord = createTimeInEvent(cRecord, "0044-03-14 0900")
+updatedBpRecord = createTimeOutEvent(cRecord, "0044-03-14 2100")
+updatedBpRecord = createTimeInEvent(cRecord, "0044-03-15 0900")
+updatedBpRecord = createTimeOutEvent(cRecord, "0044-03-15 1100")
+
+function allWagesFor(employee) {
+  //get all dates (the date keys from all objects/dates in the array) and put into an array
+  let wageDates = employee.timeInEvents.map(element => 
+    {
+      return element.date //[YYYY--MM--DD, YYYY--MM--DD, YYYY--MM--DD] etc. 
+  } //wageDates is now an array
+  )
+  let reducer = (previousValue, currentValue) => previousValue + currentValue
+  let totalPay = wageDates.reduce(function(previousWage, date){
+
+  },0)
+  return totalPay
+}
+//x is array
+//y is firstName
+
+let lokiRecord = createEmployeeRecord( ["Loki", "Laufeysson-Odinsson", "HR Representative", 35])
+
+// function findEmployeeByFirstName(x, y) {
+//   return x.find(function(element) {
+//     element.firstName === y
+//   })
+// }
+
+// let y = x.timeInEvents
+// let z = y.map(y[0].hour)
+// //map(hoursWorkedOnDate)
+// let dateArray = z.map(wagesEarnedOnDate(element));
+// const reducer = (a, b) => a + b;
+// let sum = dateArray.reduce(reducer);
+// return sum
+
+
+
+
+
+
+//END of main lab
 
 //Scope pertains to the visibility of variables, and 
 //context refers to the object to which a function belongs.
